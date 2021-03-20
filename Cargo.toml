@@ -1,0 +1,14 @@
+[package]
+name = "guess_numbre"
+version = "0.1.0"
+authors = ["LSASSE <louis.sasse@ynov.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rand = "0.8.3"
+savefile = {vertion = "0.7.4", feature = ["durations"]}
+serde_derive = "1.0.124"
+serde = "1.0.124"
+savefile-derive = "0.7.4"
