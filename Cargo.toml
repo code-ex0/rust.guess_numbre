@@ -12,3 +12,4 @@ savefile = "0.7.4"
 serde_derive = "1.0.124"
 serde = "1.0.124"
 savefile-derive = "0.7.4"
+ctrlc = { version = "3.0", features = ["termination"] }
