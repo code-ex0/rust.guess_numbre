@@ -8,7 +8,7 @@ edition = "2018"
 
 [dependencies]
 rand = "0.8.3"
-savefile = {vertion = "0.7.4", feature = ["durations"]}
+savefile = "0.7.4"
 serde_derive = "1.0.124"
 serde = "1.0.124"
 savefile-derive = "0.7.4"
