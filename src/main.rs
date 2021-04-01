@@ -109,6 +109,12 @@ impl Historic {
     fn get_number(&self) -> &Number {
         &self.number
     }
+    fn convert_game_duration(&self) -> String {
+        let minutes = self.game_duration / 1000 / 60 ;
+        let seconds = self.game_duration /1000 - minutes * 60;
+        let milliseconds = self.game_duration - minutes * 60 * 1000 - seconds * 1000;
+        format!("{:0>2}:{:0>2}.{:0>3}", minutes, seconds, milliseconds)
+    }
 }
 
 impl Statistic {
@@ -223,7 +229,6 @@ fn start_game(player: &mut Player) {
             break;
         }
     }
-
     let won: bool = propositions.last().unwrap() == &number.get_number_to_find();
     if won == true {
         println!("║ you won in {} try", attempts);
@@ -252,6 +257,7 @@ fn design(id: i32) -> &'static str {
 ║   2. -change user
 ║   3. -start new game
 ║   4. -statistic
+║   5. -game historic
 ║  /q. -exit program"
         }
         2 => {
@@ -322,6 +328,22 @@ fn print_statistics(game: &mut Game) {
     }
 }
 
+fn print_historic(game: &mut Game) {
+    if !&game.get_players().is_empty() {
+        for i in game.get_players() {
+            println!("║\n╠═══ {}", i.get_user_name());
+            for (index, j) in i.get_statistic().get_historic().iter().enumerate() {
+                if index != i.get_statistic().get_historic().len() - 1 {
+                    println!("║    ╠═══ {}", j.convert_game_duration());
+                }
+                else {
+                    println!("║    ╚═══ {}", j.convert_game_duration());
+                }
+            }
+        }
+    }
+}
+
 fn menu(game: &mut Game) {
     println!("{0}\n{1}\n{2}", design(2), design(1), design(3));
     loop {
@@ -342,6 +364,9 @@ fn menu(game: &mut Game) {
             }
             "4" => {
                 print_statistics(game);
+            }
+            "5" => {
+                print_historic(game);
             }
             "/q" => {
                 break;
