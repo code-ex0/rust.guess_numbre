@@ -14,7 +14,7 @@ pub fn get_time_ms() -> i64 {
 pub fn input(question: &str) -> String {
     let mut input_line = String::new();
     print!("{}",question);
-    io::stdout().flush();
+    io::stdout().flush().unwrap();
     io::stdin().read_line(&mut input_line).unwrap();
     input_line.trim().to_string()
 }
@@ -22,8 +22,8 @@ pub fn input(question: &str) -> String {
 pub fn ask_number (question: &str) -> i32 {
     let mut input = String::new();
     print!("{}", question);
-    io::stdout().flush();
-    stdin().read_line(&mut input);
+    io::stdout().flush().unwrap();
+    stdin().read_line(&mut input).unwrap();
     return match input.trim().parse() {
         Ok(o) => {
             o

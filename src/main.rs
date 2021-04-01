@@ -4,18 +4,16 @@
 #[warn(unused_must_use)]
 mod lib;
 
-extern crate savefile;
-extern crate serde_derive;
 #[macro_use]
 extern crate savefile_derive;
+extern crate savefile;
+extern crate serde_derive;
 
 use rand::prelude::*;
 use savefile::prelude::*;
 use serde_derive::{Deserialize, Serialize};
 use savefile::load_file;
 use std::path::Path;
-use std::panic::resume_unwind;
-use std::alloc::Global;
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, Savefile)]
 struct Number {
@@ -53,7 +51,6 @@ struct Game {
     players: Vec<Player>,
     player_select: i32
 }
-
 
 impl Number {
     fn new() -> Number {
@@ -144,12 +141,7 @@ impl Player {
                 println!("║ please enter a right answer");
             }
         };
-        Player {
-            id: 0,
-            user_name,
-            age,
-            statistic: Default::default(),
-        }
+        Player {id: 0, user_name, age, statistic: Default::default()}
     }
     fn get_id(&self) -> i32 {
         self.id
@@ -180,10 +172,7 @@ impl Game {
             let game: Result<Game, SavefileError> = load_game();
             game.unwrap()
         } else {
-            Game {
-                players: Default::default(),
-                player_select: 0
-            }
+            Game {players: Default::default(), player_select: 0 }
         }
     }
     fn new_player(&mut self, player: Player) {
@@ -306,8 +295,6 @@ fn choose_player(game: &mut Game) {
             }
         }
     }
-
-
 }
 
 fn print_statistics(game: &mut Game) {
@@ -323,7 +310,7 @@ fn print_statistics(game: &mut Game) {
                     propositions.push(*k)
                 }
             };
-            println!("║- {} {} -- {} -- {} -- {} -- {} --",
+            println!("║ - {} {} -- {} -- {} -- {} -- {} --",
                      i.get_id(),
                      i.get_user_name(), i.get_statistic().get_all_game(),
                      i.get_statistic().get_won_game(),
@@ -387,6 +374,7 @@ mod tests {
 
     #[test]
     fn test(){
+        println!("{number:>width$}", number=100, width=6);
         assert_eq!(0, 0)
     }
 
